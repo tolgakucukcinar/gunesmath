@@ -16,7 +16,7 @@ export interface Example {
 export interface LessonCard {
   id: string;
   type: 'text' | 'image' | 'interactive' | 'example';
-  content: string; 
+  content: string;
   imageUrl?: string;
   example?: Example;
 }
@@ -42,43 +42,43 @@ export const MATH_CONTENT: Topic[] = [
     id: 'natural-numbers',
     title: 'Doğal Sayılar',
     icon: 'Hash',
-    color: 'bg-orange-500',
+    color: 'bg-fun-orange',
     subTopics: [
       {
         id: 'millions',
         title: 'Milyonlar',
         description: '7, 8 ve 9 basamaklı sayıları okuma ve yazma.',
         cards: [
-            { 
-              id: 'c1', 
-              type: 'text', 
-              content: '👋 Hoş geldin! Sayıların büyülü dünyasına giriş yapıyoruz. Bugün **Milyonlar** ile tanışacağız.' 
-            },
-            { 
-              id: 'c2', 
-              type: 'text', 
-              content: 'Sayıları okumak bazen zor gelebilir ama bir sırrımız var: **Bölükler!** Sayıları sağdan sola doğru üçerli gruplara ayırırız.' 
-            },
-            {
-              id: 'c3',
-              type: 'example',
-              content: 'Hadi bir örneği inceleyelim:',
-              example: {
-                id: 'ex1',
-                problem: '12.345.678 sayısı nasıl okunur?',
-                solution: 'On iki milyon üç yüz kırk beş bin altı yüz yetmiş sekiz',
-                stepByStep: [
-                  'En sağdaki 3 rakam (678) -> Birler Bölüğü',
-                  'Ortadaki 3 rakam (345) -> Binler Bölüğü',
-                  'En soldaki kısım (12) -> Milyonlar Bölüğü',
-                  'Okurken önce sayıyı söyleriz, sonra bölüğün ismini ekleriz!'
-                ]
-              }
+          {
+            id: 'c1',
+            type: 'text',
+            content: '👋 Hoş geldin! Sayıların büyülü dünyasına giriş yapıyoruz. Bugün **Milyonlar** ile tanışacağız.'
+          },
+          {
+            id: 'c2',
+            type: 'text',
+            content: 'Sayıları okumak bazen zor gelebilir ama bir sırrımız var: **Bölükler!** Sayıları sağdan sola doğru üçerli gruplara ayırırız.'
+          },
+          {
+            id: 'c3',
+            type: 'example',
+            content: 'Hadi bir örneği inceleyelim:',
+            example: {
+              id: 'ex1',
+              problem: '12.345.678 sayısı nasıl okunur?',
+              solution: 'On iki milyon üç yüz kırk beş bin altı yüz yetmiş sekiz',
+              stepByStep: [
+                'En sağdaki 3 rakam (678) -> Birler Bölüğü',
+                'Ortadaki 3 rakam (345) -> Binler Bölüğü',
+                'En soldaki kısım (12) -> Milyonlar Bölüğü',
+                'Okurken önce sayıyı söyleriz, sonra bölüğün ismini ekleriz!'
+              ]
             }
+          }
         ],
         quiz: [
-            { id: 'q1', question: '78.102.005 sayısının okunuşu nedir?', options: ['Yetmiş sekiz milyon yüz iki bin beş', 'Yedi yüz seksen milyon yüz iki bin beş', 'Yetmiş sekiz milyon on iki bin beş'], correctIndex: 0, explanation: 'Milyonlar bölüğünde 78 var. Binler bölüğünde 102 var. Birler bölüğünde sadece 5 var (005).' },
-            { id: 'q2', question: 'Birler bölüğü 045, binler bölüğü 100 ve milyonlar bölüğü 7 olan sayı hangisidir?', options: ['7.100.045', '7.045.100', '100.045.007'], correctIndex: 0, explanation: 'Milyonlar (7) en başa, sonra binler (100), en sona birler (045) gelir. Sonuç: 7.100.045' }
+          { id: 'q1', question: '78.102.005 sayısının okunuşu nedir?', options: ['Yetmiş sekiz milyon yüz iki bin beş', 'Yedi yüz seksen milyon yüz iki bin beş', 'Yetmiş sekiz milyon on iki bin beş'], correctIndex: 0, explanation: 'Milyonlar bölüğünde 78 var. Binler bölüğünde 102 var. Birler bölüğünde sadece 5 var (005).' },
+          { id: 'q2', question: 'Birler bölüğü 045, binler bölüğü 100 ve milyonlar bölüğü 7 olan sayı hangisidir?', options: ['7.100.045', '7.045.100', '100.045.007'], correctIndex: 0, explanation: 'Milyonlar (7) en başa, sonra binler (100), en sona birler (045) gelir. Sonuç: 7.100.045' }
         ]
       }
     ]
@@ -87,25 +87,25 @@ export const MATH_CONTENT: Topic[] = [
     id: 'operations',
     title: 'Doğal Sayılarla İşlemler',
     icon: 'Calculator',
-    color: 'bg-red-500',
+    color: 'bg-red-400',
     subTopics: [
-        {
-            id: 'addition-subtraction',
-            title: 'Toplama ve Çıkarma',
-            description: 'Eldeli toplama ve onluk bozarak çıkarma.',
-            cards: [
-              { id: 'c1', type: 'text', content: 'Toplama işlemine her zaman **birler basamağından** (en sağdan) başlarız.' },
-              { id: 'c2', type: 'text', content: 'Eğer toplam 9\'dan büyükse, **Elde** var demektir! Bu eldeyi bir sonraki basamağa eklemeyi unutma.' }
-            ],
-            quiz: [{ id: 'q1', question: '125 + 275 = ?', options: ['300', '400', '390'], correctIndex: 1, explanation: '5+5=10 (elde var 1), 2+7=9 (eldeyle 10), 1+2=3 (eldeyle 4). Sonuç 400.' }]
-        }
+      {
+        id: 'addition-subtraction',
+        title: 'Toplama ve Çıkarma',
+        description: 'Eldeli toplama ve onluk bozarak çıkarma.',
+        cards: [
+          { id: 'c1', type: 'text', content: 'Toplama işlemine her zaman **birler basamağından** (en sağdan) başlarız.' },
+          { id: 'c2', type: 'text', content: 'Eğer toplam 9\'dan büyükse, **Elde** var demektir! Bu eldeyi bir sonraki basamağa eklemeyi unutma.' }
+        ],
+        quiz: [{ id: 'q1', question: '125 + 275 = ?', options: ['300', '400', '390'], correctIndex: 1, explanation: '5+5=10 (elde var 1), 2+7=9 (eldeyle 10), 1+2=3 (eldeyle 4). Sonuç 400.' }]
+      }
     ]
   },
   {
     id: 'fractions',
     title: 'Kesirler',
     icon: 'PieChart',
-    color: 'bg-blue-500',
+    color: 'bg-fun-blue',
     subTopics: [
       {
         id: 'basic-fractions',
@@ -175,15 +175,15 @@ export const MATH_CONTENT: Topic[] = [
             type: 'example',
             content: 'Hadi toplayalım:',
             example: {
-                id: 'ex2',
-                problem: '2/7 + 3/7 = ?',
-                solution: '5/7',
-                stepByStep: [
-                  'Paydalar aynı mı? Evet (7).',
-                  'Payları topla: 2 + 3 = 5.',
-                  'Ortak paydayı aynen yaz.',
-                  'Sonuç: 5/7'
-                ]
+              id: 'ex2',
+              problem: '2/7 + 3/7 = ?',
+              solution: '5/7',
+              stepByStep: [
+                'Paydalar aynı mı? Evet (7).',
+                'Payları topla: 2 + 3 = 5.',
+                'Ortak paydayı aynen yaz.',
+                'Sonuç: 5/7'
+              ]
             }
           }
         ],
@@ -203,7 +203,7 @@ export const MATH_CONTENT: Topic[] = [
     id: 'decimals',
     title: 'Ondalık Gösterim',
     icon: 'MoreHorizontal',
-    color: 'bg-green-500',
+    color: 'bg-fun-green',
     subTopics: [
       {
         id: 'decimal-intro',
@@ -220,74 +220,74 @@ export const MATH_CONTENT: Topic[] = [
     id: 'percentages',
     title: 'Yüzdeler',
     icon: 'Percent',
-    color: 'bg-purple-500',
+    color: 'bg-fun-purple',
     subTopics: [
-        {
-            id: 'percent-intro',
-            title: 'Yüzde Kavramı',
-            description: 'Bir bütünü 100 eş parçaya bölmek.',
-            cards: [{ id: 'c1', type: 'text', content: 'Paydası 100 olan kesirleri % sembolü ile gösteririz. 50/100 = %50 (Yüzde elli).' }],
-            quiz: []
-        }
+      {
+        id: 'percent-intro',
+        title: 'Yüzde Kavramı',
+        description: 'Bir bütünü 100 eş parçaya bölmek.',
+        cards: [{ id: 'c1', type: 'text', content: 'Paydası 100 olan kesirleri % sembolü ile gösteririz. 50/100 = %50 (Yüzde elli).' }],
+        quiz: []
+      }
     ]
   },
   {
     id: 'geometry',
     title: 'Geometri',
     icon: 'Triangle',
-    color: 'bg-indigo-500',
+    color: 'bg-indigo-400',
     subTopics: [
-        {
-            id: 'basic-geo',
-            title: 'Temel Kavramlar',
-            description: 'Nokta, doğru, doğru parçası ve ışın.',
-            cards: [{ id: 'c1', type: 'text', content: 'Nokta kalemin kağıda bıraktığı izdir. Büyük harfle isimlendirilir. Doğru ise iki ucu sonsuza giden çizgi modelidir.' }],
-            quiz: []
-        },
-        {
-            id: 'triangles',
-            title: 'Üçgenler',
-            description: 'Üçgen çeşitleri ve özellikleri.',
-            cards: [{ id: 'c1', type: 'text', content: 'Üçgenin 3 kenarı ve 3 köşesi vardır. İç açıları toplamı her zaman 180 derecedir.' }],
-            quiz: []
-        }
+      {
+        id: 'basic-geo',
+        title: 'Temel Kavramlar',
+        description: 'Nokta, doğru, doğru parçası ve ışın.',
+        cards: [{ id: 'c1', type: 'text', content: 'Nokta kalemin kağıda bıraktığı izdir. Büyük harfle isimlendirilir. Doğru ise iki ucu sonsuza giden çizgi modelidir.' }],
+        quiz: []
+      },
+      {
+        id: 'triangles',
+        title: 'Üçgenler',
+        description: 'Üçgen çeşitleri ve özellikleri.',
+        cards: [{ id: 'c1', type: 'text', content: 'Üçgenin 3 kenarı ve 3 köşesi vardır. İç açıları toplamı her zaman 180 derecedir.' }],
+        quiz: []
+      }
     ]
   },
   {
     id: 'measurement',
     title: 'Ölçme',
     icon: 'Ruler',
-    color: 'bg-teal-500',
+    color: 'bg-teal-400',
     subTopics: [
-        {
-            id: 'length',
-            title: 'Uzunluk Ölçme',
-            description: 'Metre, santimetre ve dönüşümler.',
-            cards: [{ id: 'c1', type: 'text', content: 'Temel uzunluk ölçü birimi metredir (m). 1 metre = 100 santimetredir (cm).' }],
-            quiz: []
-        },
-        {
-            id: 'time',
-            title: 'Zaman Ölçme',
-            description: 'Saat, dakika, saniye.',
-            cards: [{ id: 'c1', type: 'text', content: '1 saat = 60 dakikadır. 1 dakika = 60 saniyedir.' }],
-            quiz: []
-        }
+      {
+        id: 'length',
+        title: 'Uzunluk Ölçme',
+        description: 'Metre, santimetre ve dönüşümler.',
+        cards: [{ id: 'c1', type: 'text', content: 'Temel uzunluk ölçü birimi metredir (m). 1 metre = 100 santimetredir (cm).' }],
+        quiz: []
+      },
+      {
+        id: 'time',
+        title: 'Zaman Ölçme',
+        description: 'Saat, dakika, saniye.',
+        cards: [{ id: 'c1', type: 'text', content: '1 saat = 60 dakikadır. 1 dakika = 60 saniyedir.' }],
+        quiz: []
+      }
     ]
   },
   {
     id: 'data',
     title: 'Veri İşleme',
     icon: 'BarChart',
-    color: 'bg-pink-500',
+    color: 'bg-fun-pink',
     subTopics: [
-        {
-            id: 'graphs',
-            title: 'Sıklık Tablosu ve Grafikler',
-            description: 'Verileri toplama ve yorumlama.',
-            cards: [{ id: 'c1', type: 'text', content: 'Verileri düzenli görmek için sıklık tablosu veya sütun grafiği kullanırız.' }],
-            quiz: []
-        }
+      {
+        id: 'graphs',
+        title: 'Sıklık Tablosu ve Grafikler',
+        description: 'Verileri toplama ve yorumlama.',
+        cards: [{ id: 'c1', type: 'text', content: 'Verileri düzenli görmek için sıklık tablosu veya sütun grafiği kullanırız.' }],
+        quiz: []
+      }
     ]
   }
 ];
