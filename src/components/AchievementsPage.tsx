@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Star, Medal } from 'lucide-react';
+import { Trophy, Medal } from 'lucide-react';
 
 export const AchievementsPage: React.FC = () => {
     return (

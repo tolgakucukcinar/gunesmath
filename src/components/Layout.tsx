@@ -1,8 +1,8 @@
-import React, { ReactNode, useState } from 'react';
+import React, { type ReactNode, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { Outlet } from 'react-router-dom';
 import { Mascot } from './Mascot';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 interface LayoutProps {
   children?: ReactNode;

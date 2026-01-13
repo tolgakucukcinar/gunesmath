@@ -30,7 +30,7 @@ interface GeometricShapeProps {
     label?: string;
 }
 
-export const GeometricShape: React.FC<GeometricShapeProps> = ({ type, className = "", label }) => {
+export const GeometricShape: React.FC<GeometricShapeProps> = ({ type, className = "" }) => {
     const baseClass = "w-full h-64 mx-auto drop-shadow-sm";
 
     const renderShape = () => {
