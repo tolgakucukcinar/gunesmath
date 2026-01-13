@@ -25,7 +25,7 @@ export const QuizView: React.FC = () => {
 
   const handleOptionClick = (index: number) => {
     if (isAnswered) return;
-    
+
     setSelectedOption(index);
     setIsAnswered(true);
 
@@ -39,7 +39,7 @@ export const QuizView: React.FC = () => {
       });
       (window as any).speakMascot("Aferin! Harika gidiyorsun.");
     } else {
-       (window as any).speakMascot("Üzgünüm, yanlış oldu. Açıklamayı oku bakalım.");
+      (window as any).speakMascot("Üzgünüm, yanlış oldu. Açıklamayı oku bakalım.");
     }
   };
 
@@ -51,11 +51,11 @@ export const QuizView: React.FC = () => {
     } else {
       setShowResults(true);
       if (score === subTopic.quiz.length) {
-          confetti({
-            particleCount: 200,
-            spread: 160,
-            origin: { y: 0.6 }
-          });
+        confetti({
+          particleCount: 200,
+          spread: 160,
+          origin: { y: 0.6 }
+        });
       }
     }
   };
@@ -66,44 +66,46 @@ export const QuizView: React.FC = () => {
 
     // Save Progress
     if (subTopicId) {
-        saveQuizScore(subTopicId, finalScore);
-        if (percentage >= 50) {
-            markTopicComplete(subTopicId);
-        }
+      saveQuizScore(subTopicId, finalScore);
+      if (percentage >= 50) {
+        markTopicComplete(subTopicId);
+      }
     }
-    
+
     return (
       <div className="max-w-xl mx-auto py-12 px-4 text-center">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-indigo-100">
-            <Award className="w-24 h-24 mx-auto text-yellow-500 mb-6" />
-            <h2 className="text-4xl font-extrabold text-indigo-900 mb-4">Sınav Bitti!</h2>
-            <p className="text-2xl text-slate-600 mb-8">
-                Skorun: <span className="font-bold text-indigo-600">{finalScore} / {subTopic.quiz.length}</span>
-            </p>
-            
-            <div className="w-full bg-slate-200 rounded-full h-4 mb-8">
-                <div 
-                    className={`h-4 rounded-full transition-all duration-1000 ${percentage >= 80 ? 'bg-green-500' : percentage >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                    style={{ width: `${percentage}%` }}
-                ></div>
-            </div>
+        <div className="bg-white rounded-[3rem] shadow-fun-hover p-8 border-4 border-white ring-4 ring-indigo-50 relative overflow-hidden">
+          <div className="absolute top-0 w-full left-0 h-4 bg-gradient-to-r from-fun-yellow via-fun-pink to-fun-purple"></div>
 
-            <div className="flex flex-col space-y-4">
-                <Link 
-                    to="/"
-                    className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition flex items-center justify-center"
-                >
-                    <Home className="w-5 h-5 mr-2" />
-                    Ana Sayfaya Dön
-                </Link>
-                <button 
-                    onClick={() => window.location.reload()}
-                    className="w-full py-4 bg-white border-2 border-indigo-200 text-indigo-700 rounded-xl font-bold hover:bg-indigo-50 transition flex items-center justify-center"
-                >
-                    <RotateCcw className="w-5 h-5 mr-2" />
-                    Tekrar Dene
-                </button>
-            </div>
+          <Award className="w-32 h-32 mx-auto text-fun-yellow drop-shadow-md mb-6 animate-pulse" strokeWidth={1.5} />
+          <h2 className="text-5xl font-black text-fun-blue mb-4 tracking-tight">Sınav Bitti!</h2>
+          <p className="text-3xl text-slate-600 mb-8 font-bold">
+            Skorun: <span className="text-fun-green bg-fun-green/10 px-4 py-1 rounded-xl">{finalScore} / {subTopic.quiz.length}</span>
+          </p>
+
+          <div className="w-full bg-slate-100 rounded-full h-6 mb-10 p-1">
+            <div
+              className={`h-4 rounded-full transition-all duration-1000 ${percentage >= 80 ? 'bg-fun-green' : percentage >= 50 ? 'bg-fun-yellow' : 'bg-red-400'}`}
+              style={{ width: `${percentage}%` }}
+            ></div>
+          </div>
+
+          <div className="flex flex-col space-y-4">
+            <Link
+              to="/"
+              className="w-full py-4 bg-fun-blue text-white rounded-2xl font-black shadow-fun hover:shadow-fun-hover hover:-translate-y-1 transition transform flex items-center justify-center text-xl"
+            >
+              <Home className="w-6 h-6 mr-3" strokeWidth={3} />
+              Ana Sayfaya Dön
+            </Link>
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full py-4 bg-white border-2 border-slate-200 text-slate-500 rounded-2xl font-bold hover:bg-slate-50 hover:text-slate-700 transition flex items-center justify-center text-lg"
+            >
+              <RotateCcw className="w-5 h-5 mr-2" strokeWidth={3} />
+              Tekrar Dene
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -111,62 +113,63 @@ export const QuizView: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-8 px-4">
-      <div className="mb-8 flex items-center justify-between">
-         <h2 className="text-xl font-bold text-slate-500">Soru {currentQuestionIndex + 1} / {subTopic.quiz.length}</h2>
-         <div className="text-indigo-600 font-bold">Puan: {score}</div>
+      <div className="mb-8 flex items-center justify-between px-2">
+        <h2 className="text-xl font-black text-slate-400 uppercase tracking-widest">Soru {currentQuestionIndex + 1} / {subTopic.quiz.length}</h2>
+        <div className="text-fun-blue font-black bg-white px-4 py-2 rounded-xl shadow-sm text-lg border border-fun-blue/10">Puan: {score}</div>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
-        <div className="bg-indigo-600 p-8 text-white">
-            <h3 className="text-2xl font-bold leading-relaxed">{currentQuestion.question}</h3>
+      <div className="bg-white rounded-[2rem] shadow-fun overflow-hidden border-4 border-transparent hover:border-fun-blue/20 transition-all duration-300">
+        <div className="bg-fun-blue p-8 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+          <h3 className="text-2xl font-black leading-relaxed relative z-10">{currentQuestion.question}</h3>
         </div>
 
         <div className="p-8 space-y-4">
-            {currentQuestion.options.map((option, idx) => {
-                let btnClass = "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 text-lg font-medium flex justify-between items-center ";
-                
-                if (isAnswered) {
-                    if (idx === currentQuestion.correctIndex) {
-                        btnClass += "border-green-500 bg-green-50 text-green-700";
-                    } else if (idx === selectedOption) {
-                        btnClass += "border-red-500 bg-red-50 text-red-700";
-                    } else {
-                        btnClass += "border-slate-100 text-slate-400 opacity-50";
-                    }
-                } else {
-                    btnClass += "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700";
-                }
+          {currentQuestion.options.map((option, idx) => {
+            let btnClass = "w-full text-left p-5 rounded-2xl border-b-4 transition-all duration-200 text-lg font-bold flex justify-between items-center transform active:scale-[0.99] ";
 
-                return (
-                    <button
-                        key={idx}
-                        onClick={() => handleOptionClick(idx)}
-                        disabled={isAnswered}
-                        className={btnClass}
-                    >
-                        <span>{option}</span>
-                        {isAnswered && idx === currentQuestion.correctIndex && <Check className="w-6 h-6 text-green-600" />}
-                        {isAnswered && idx === selectedOption && idx !== currentQuestion.correctIndex && <X className="w-6 h-6 text-red-600" />}
-                    </button>
-                );
-            })}
+            if (isAnswered) {
+              if (idx === currentQuestion.correctIndex) {
+                btnClass += "border-fun-green bg-green-50 text-fun-green shadow-none translate-y-1";
+              } else if (idx === selectedOption) {
+                btnClass += "border-red-400 bg-red-50 text-red-500 shadow-none translate-y-1";
+              } else {
+                btnClass += "border-slate-100 bg-slate-50 text-slate-400 opacity-50 shadow-none";
+              }
+            } else {
+              btnClass += "bg-white border-slate-200 shadow-sm hover:border-fun-orange hover:bg-orange-50 hover:text-fun-orange text-slate-600";
+            }
+
+            return (
+              <button
+                key={idx}
+                onClick={() => handleOptionClick(idx)}
+                disabled={isAnswered}
+                className={btnClass}
+              >
+                <span>{option}</span>
+                {isAnswered && idx === currentQuestion.correctIndex && <Check className="w-8 h-8 text-fun-green" strokeWidth={3} />}
+                {isAnswered && idx === selectedOption && idx !== currentQuestion.correctIndex && <X className="w-8 h-8 text-red-500" strokeWidth={3} />}
+              </button>
+            );
+          })}
         </div>
 
         {isAnswered && (
-            <div className="px-8 pb-8 animate-fade-in">
-                <div className={`p-4 rounded-xl mb-6 ${selectedOption === currentQuestion.correctIndex ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                    <p className="font-bold mb-1">
-                        {selectedOption === currentQuestion.correctIndex ? 'Harika! Doğru Cevap.' : 'Üzgünüm, yanlış cevap.'}
-                    </p>
-                    <p className="text-sm opacity-90">{currentQuestion.explanation}</p>
-                </div>
-                <button 
-                    onClick={handleNext}
-                    className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold shadow-lg hover:bg-indigo-700 transition"
-                >
-                    {currentQuestionIndex < subTopic.quiz.length - 1 ? 'Sonraki Soru' : 'Sonucu Gör'}
-                </button>
+          <div className="px-8 pb-8 animate-fade-in">
+            <div className={`p-6 rounded-2xl mb-6 border-l-8 shadow-sm ${selectedOption === currentQuestion.correctIndex ? 'bg-green-50 border-green-400' : 'bg-red-50 border-red-400'}`}>
+              <p className={`font-black text-lg mb-1 ${selectedOption === currentQuestion.correctIndex ? 'text-green-700' : 'text-red-700'}`}>
+                {selectedOption === currentQuestion.correctIndex ? 'Harika! Doğru Cevap.' : 'Üzgünüm, yanlış cevap.'}
+              </p>
+              <p className="text-base font-medium text-slate-600 leading-relaxed">{currentQuestion.explanation}</p>
             </div>
+            <button
+              onClick={handleNext}
+              className="w-full py-4 bg-fun-blue text-white rounded-2xl font-black shadow-fun hover:shadow-fun-hover hover:-translate-y-1 transition transform text-xl"
+            >
+              {currentQuestionIndex < subTopic.quiz.length - 1 ? 'Sonraki Soru' : 'Sonucu Gör'}
+            </button>
+          </div>
         )}
       </div>
     </div>
