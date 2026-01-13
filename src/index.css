@@ -1,38 +1,128 @@
 @import "tailwindcss";
 
+
 @theme {
-  --font-fredoka: "Fredoka", sans-serif;
+  --font-fredoka: 'Fredoka', sans-serif;
 
-  --color-fun-orange: #FF8C00;
-  --color-fun-yellow: #FFD700;
-  --color-fun-blue: #4169E1;
-  --color-fun-green: #32CD32;
-  --color-fun-pink: #FF69B4;
-  --color-fun-purple: #9370DB;
-  --color-paper-white: #FDFBF7;
+  /* Authentic Lego Palette - "Rust" & Classic Tones */
+  --color-lego-red: #C91A09;
+  /* Classic Red */
+  --color-lego-dark-red: #8a1309;
+  /* Deep "Rust" Red */
 
-  --shadow-fun: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
-  --shadow-fun-hover: 6px 6px 0px 0px rgba(0, 0, 0, 0.15);
+  --color-lego-blue: #0055BF;
+  /* Classic Blue */
+  --color-lego-dark-blue: #023778;
+  /* Navy Blue */
+
+  --color-lego-yellow: #F2CD37;
+  /* Classic Yellow */
+  --color-lego-dark-yellow: #b4961e;
+  /* Gold/Ochre */
+
+  --color-lego-green: #237841;
+  /* Classic Green (Darker) */
+  --color-lego-dark-green: #114223;
+  /* Forest Green */
+
+  --color-lego-gray: #A0A5A9;
+  /* Medium Stone Grey */
+  --color-lego-dark-gray: #6C6E68;
+  /* Dark Stone Grey */
+  --color-lego-white: #F4F4F4;
+  /* Milky White */
+
+  --shadow-brick: 0 6px 0 rgba(0, 0, 0, 0.2);
+  --shadow-brick-hover: 0 8px 0 rgba(0, 0, 0, 0.2);
+  --shadow-brick-active: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 @layer base {
-  html {
-    font-family: "Fredoka", sans-serif;
-    background-color: #FDFBF7;
-    color: #333;
+  body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: #E4E4DA;
+    /* Light Stone Grey background */
+    /* Realistic Baseplate Pattern */
+    background-image:
+      radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 25%, transparent 26%),
+      radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 25%, transparent 26%);
+    background-size: 40px 40px, 40px 40px;
+    background-position: 0 0, 2px 2px;
+    /* Slight offset for 3D feel */
   }
 }
 
-@layer components {
-  .btn-primary {
-    @apply bg-fun-orange text-white font-bold py-3 px-6 rounded-2xl shadow-fun transition-transform hover:-translate-y-1 hover:shadow-fun-hover active:translate-y-0 active:shadow-none;
+@layer utilities {
+  .lego-brick {
+    @apply relative border-b-6 rounded-lg transition-all duration-150 active:translate-y-1 active:border-b-2 shadow-lg;
   }
 
-  .btn-secondary {
-    @apply bg-fun-blue text-white font-bold py-3 px-6 rounded-2xl shadow-fun transition-transform hover:-translate-y-1 hover:shadow-fun-hover active:translate-y-0 active:shadow-none;
+  /* Specific Brick Colors - Authentic/Rust Feel */
+  .brick-red {
+    @apply bg-lego-red border-lego-dark-red text-white hover:bg-[#d6200d];
   }
 
-  .card {
-    @apply bg-white rounded-3xl p-6 shadow-fun border-2 border-transparent hover:border-fun-yellow transition-all;
+  .brick-blue {
+    @apply bg-lego-blue border-lego-dark-blue text-white hover:bg-[#0066e3];
   }
+
+  .brick-yellow {
+    @apply bg-lego-yellow border-lego-dark-yellow text-slate-900 hover:bg-[#fae14f];
+  }
+
+  .brick-green {
+    @apply bg-lego-green border-lego-dark-green text-white hover:bg-[#2e9c54];
+  }
+
+  .brick-white {
+    @apply bg-lego-white border-slate-300 text-slate-700 hover:bg-white;
+  }
+
+  .brick-gray {
+    @apply bg-lego-gray border-lego-dark-gray text-white hover:bg-[#b0b5b9];
+  }
+
+  /* Realistic "Stud" Pattern for tops of bricks or sidebars */
+  .lego-studs-pattern {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.15) 25%, transparent 26%);
+    background-size: 20px 20px;
+  }
+
+  /* Top Studs for a single brick look */
+  .lego-stud-top {
+    position: relative;
+  }
+
+  .lego-stud-top::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-repeat: repeat-x;
+    background-size: 20px 6px;
+    background-image: radial-gradient(circle at 10px 3px, rgba(0, 0, 0, 0.2) 60%, transparent 61%);
+    opacity: 0.6;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-lego-gray);
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: content-box;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-lego-dark-gray);
 }

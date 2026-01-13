@@ -8,6 +8,8 @@ import { NumberRush } from './components/games/NumberRush';
 import { FractionMatch } from './components/games/FractionMatch';
 import { GeoDetective } from './components/games/GeoDetective';
 import { ProgressProvider } from './context/ProgressContext';
+import { AchievementsPage } from './components/AchievementsPage';
+import { SettingsPage } from './components/SettingsPage';
 
 function App() {
   return (
@@ -15,12 +17,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
+          <Route path="lessons" element={<Dashboard />} /> {/* Lessons shows the Dashboard for now */}
           <Route path="lesson/:topicId/:subTopicId" element={<LessonView />} />
           <Route path="quiz/:topicId/:subTopicId" element={<QuizView />} />
           <Route path="games" element={<GamesHub />} />
           <Route path="games/number-rush" element={<NumberRush />} />
           <Route path="games/fraction-match" element={<FractionMatch />} />
           <Route path="games/geo-detective" element={<GeoDetective />} />
+          <Route path="achievements" element={<AchievementsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </ProgressProvider>

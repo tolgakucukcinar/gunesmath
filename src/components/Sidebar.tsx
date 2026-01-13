@@ -1,91 +1,96 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { MATH_CONTENT } from '../data/mathContent';
-import { useProgress } from '../context/ProgressContext';
-import { X, CheckCircle, Gamepad2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import { Home, Gamepad2, Trophy, Settings, BookOpen, X } from 'lucide-react';
 
 interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const { completedTopics } = useProgress();
-  const location = useLocation();
+export const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
+  const menuItems = [
+    { icon: Home, label: 'Ana Sayfa', path: '/' },
+    { icon: BookOpen, label: 'Dersler', path: '/lessons' },
+    { icon: Gamepad2, label: 'Oyunlar', path: '/games' },
+    { icon: Trophy, label: 'Başarılar', path: '/achievements' },
+    { icon: Settings, label: 'Ayarlar', path: '/settings' },
+  ];
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black z-40"
-          />
+    <div className="h-full flex flex-col bg-lego-yellow border-r-8 border-lego-dark-yellow shadow-2xl relative overflow-hidden">
+      {/* Background Stud Pattern for Realism */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle at center, #000 15%, transparent 16%)', backgroundSize: '32px 32px' }}>
+      </div>
 
-          {/* Sidebar Drawer */}
-          <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 left-0 bottom-0 w-80 bg-paper-white shadow-[8px_0_0_0_rgba(0,0,0,0.1)] z-50 overflow-y-auto border-r-4 border-fun-yellow"
-          >
-            <div className="p-6 flex items-center justify-between bg-fun-yellow">
-              <h2 className="text-2xl font-black text-white drop-shadow-md">Menü</h2>
-              <button onClick={onClose} className="p-2 bg-white/20 hover:bg-white/40 rounded-xl transition text-white">
-                <X className="w-8 h-8" strokeWidth={3} />
-              </button>
+      <div className="relative z-10 flex flex-col h-full p-4">
+        {/* Mobile Close Button */}
+        <div className="md:hidden flex justify-end mb-2">
+          <button onClick={onClose} className="bg-lego-red text-white p-2 rounded-lg border-b-4 border-lego-dark-red active:border-b-0 active:translate-y-1 transition-all">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Logo Area */}
+        <div className="mb-6 flex justify-center">
+          <div className="bg-lego-red px-4 py-2 rounded-lg border-b-6 border-lego-dark-red shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+            <h1 className="text-2xl font-black text-white tracking-widest drop-shadow-md border-2 border-white/20 rounded-md px-2">
+              GÜNEŞ<span className="text-lego-yellow">MATH</span>
+            </h1>
+            {/* Decorative studs on logo brick */}
+            <div className="flex justify-between mt-1 px-1 opacity-50">
+              <div className="w-2 h-2 rounded-full bg-black/30"></div>
+              <div className="w-2 h-2 rounded-full bg-black/30"></div>
+              <div className="w-2 h-2 rounded-full bg-black/30"></div>
             </div>
+          </div>
+        </div>
 
-            <div className="p-4 space-y-4">
-              <Link
-                to="/games"
-                onClick={onClose}
-                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-fun-green to-fun-blue text-white rounded-2xl shadow-fun hover:shadow-fun-hover hover:-translate-y-1 transition transform"
-              >
-                <Gamepad2 className="w-8 h-8" />
-                <span className="font-bold text-xl">Oyun Alanı</span>
-              </Link>
-
-              <div className="space-y-6 mt-6">
-                {MATH_CONTENT.map((topic) => (
-                  <div key={topic.id} className="bg-white p-3 rounded-2xl shadow-sm border-2 border-slate-100">
-                    <h3 className="text-sm font-black text-fun-purple uppercase tracking-wider mb-2 px-2">
-                      {topic.title}
-                    </h3>
-                    <div className="space-y-1">
-                      {topic.subTopics.map((sub) => {
-                        const isCompleted = completedTopics.includes(sub.id);
-                        const isActive = location.pathname.includes(sub.id);
-
-                        return (
-                          <Link
-                            key={sub.id}
-                            to={`/lesson/${topic.id}/${sub.id}`}
-                            onClick={onClose}
-                            className={`flex items-center justify-between p-3 rounded-xl transition font-bold ${isActive
-                                ? 'bg-fun-orange/10 text-fun-orange border-2 border-fun-orange/20'
-                                : 'hover:bg-slate-50 text-slate-600 border-2 border-transparent'
-                              }`}
-                          >
-                            <span className="text-base">{sub.title}</span>
-                            {isCompleted && <CheckCircle className="w-5 h-5 text-fun-green fill-green-100" />}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
+        {/* Menu Items - Stacked Bricks */}
+        <nav className="flex-1 space-y-3">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `group relative flex items-center space-x-3 px-5 py-3 rounded-lg font-bold text-lg transition-all duration-150 transform ${isActive
+                  ? 'bg-lego-blue border-b-4 border-lego-dark-blue text-white shadow-lg translate-y-0.5'
+                  : 'bg-white border-b-4 border-slate-300 text-slate-600 hover:bg-lego-white hover:border-lego-gray hover:translate-y-[-2px]'
+                }`
+              }
+              onClick={onClose}
+            >
+              {/* Studs on top of each menu brick for detail */}
+              <div className="absolute top-1 left-2 w-full flex space-x-1 opacity-20">
+                <div className="w-2 h-1 rounded-full bg-black"></div>
+                <div className="w-2 h-1 rounded-full bg-black"></div>
               </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+
+              <div className={`p-1.5 rounded-md ${
+                // Icon background logic
+                (item as any).path === "/" ? "bg-white/20" : "bg-black/5"
+                }`}>
+                <item.icon className="w-6 h-6 drop-shadow-sm" strokeWidth={3} />
+              </div>
+              <span className="tracking-tight">{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Bottom Character/Mascot placeholder - As a distinct brick */}
+        <div className="mt-auto bg-lego-green p-4 rounded-lg border-b-6 border-lego-dark-green text-white text-center font-bold shadow-md transform rotate-1">
+          <div className="relative z-10 flex items-center justify-center space-x-2">
+            <span className="text-2xl">🧱</span>
+            <span className="drop-shadow-md">Sürüm 2.0</span>
+          </div>
+          {/* Studs */}
+          <div className="absolute top-1 left-0 w-full flex justify-center space-x-2 opacity-30">
+            <div className="w-3 h-1 rounded-full bg-black"></div>
+            <div className="w-3 h-1 rounded-full bg-black"></div>
+            <div className="w-3 h-1 rounded-full bg-black"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

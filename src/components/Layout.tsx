@@ -1,43 +1,56 @@
-import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { Home, BookOpen, Menu } from 'lucide-react';
-import { Mascot } from './Mascot';
+import React, { ReactNode, useState } from 'react';
 import { Sidebar } from './Sidebar';
+import { Outlet } from 'react-router-dom';
+import { Mascot } from './Mascot';
+import { Menu, X } from 'lucide-react';
 
-export const Layout: React.FC = () => {
+interface LayoutProps {
+  children?: ReactNode;
+}
+
+export const Layout: React.FC<LayoutProps> = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-paper-white font-fredoka text-slate-800">
-      <nav className="bg-gradient-to-r from-fun-orange to-fun-pink p-4 shadow-fun text-white sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="p-2 hover:bg-white/20 rounded-xl transition shadow-sm"
-            >
-              <Menu className="w-8 h-8" strokeWidth={3} />
-            </button>
-            <Link to="/" className="flex items-center space-x-3 text-3xl font-black tracking-tight hover:scale-105 transition">
-              <BookOpen className="w-10 h-10" strokeWidth={3} />
-              <span className="hidden sm:inline drop-shadow-md">GüneşMath</span>
-            </Link>
-          </div>
+    <div className="min-h-screen flex bg-lego-gray relative overflow-hidden">
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
-          <div className="flex space-x-4">
-            <Link to="/" className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl transition font-bold shadow-sm">
-              <Home className="w-6 h-6" strokeWidth={3} />
-              <span className="hidden sm:inline">Ana Sayfa</span>
-            </Link>
-          </div>
+      {/* Sidebar */}
+      <div className={`
+        fixed inset-y-0 left-0 z-50 w-72 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Mobile Header */}
+        <div className="md:hidden bg-lego-yellow p-4 flex items-center justify-between border-b-4 border-lego-dark-yellow shadow-md">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 bg-white rounded-lg text-lego-dark-yellow active:scale-95 transition-transform"
+          >
+            <Menu className="w-8 h-8" strokeWidth={3} />
+          </button>
+          <span className="text-2xl font-black text-lego-dark-red tracking-wider">GÜNEŞ<span className="text-white">MATH</span></span>
+          <div className="w-10"></div> {/* Spacer for balance */}
         </div>
-      </nav>
 
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto overflow-x-hidden">
+          <div className="max-w-6xl mx-auto pb-24">
+            <Outlet />
+          </div>
+        </main>
+      </div>
 
-      <main className="max-w-6xl mx-auto p-4 sm:p-6 pb-20">
-        <Outlet />
-      </main>
+      {/* Mascot fixed at bottom right */}
       <Mascot />
     </div>
   );
